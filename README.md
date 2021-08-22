@@ -1,4 +1,4 @@
-# KB-ALBERT를 이용한 챗봇을 구축하였습니다.
+# KB-ALBERT를 이용한 챗봇 구축
 
 - ALBERT모델의 경우 KB에 직접 요청하여야 받을 수 있습니다.(https://github.com/KB-Bank-AI/KB-ALBERT-KO)
 - 배포 URL 포함 필요
