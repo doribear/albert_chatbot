@@ -1,0 +1,5 @@
+model/
+legacy/
+.idea/
+.git/
+/data.zip
