@@ -3,3 +3,5 @@ legacy/
 .idea/
 .git/
 /data.zip
+data/
+./idea
