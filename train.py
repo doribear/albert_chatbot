@@ -19,9 +19,9 @@ model_path = 'model'
 
 tokenizer = KbAlbertCharTokenizer.from_pretrained(model_path)
 vocab = tokenizer.get_vocab()
-#model = AlbertForSequenceClassification.from_pretrained(model_path)
+model = AlbertForSequenceClassification.from_pretrained(model_path)
 
-model = torch.load('20210817_1.pt')
+#model = torch.load('20210817.pt')
 
 class bertset(Dataset):
     def __init__(self, input_ids, token_type_ids, attention_mask, label):
@@ -38,7 +38,7 @@ class bertset(Dataset):
         return len(self.label)
 
 
-data = pd.read_excel('new_data/train_data_aug.xlsx')
+data = pd.read_excel('data/train.xlsx')
 
 tokenized = tokenizer(list(data.text), return_tensors = 'pt', padding=True, truncation=True)
 input_ids = tokenized.input_ids
@@ -49,7 +49,7 @@ label = torch.tensor(list(data.label))
 trainset = bertset(input_ids, token_type_ids, attention_mask, label)
 
 
-data = pd.read_excel('new_data/daily_test.xlsx')
+data = pd.read_excel('data/test.xlsx')
 
 tokenized = tokenizer(list(data.text), return_tensors = 'pt', padding=True, truncation=True)
 input_ids = tokenized.input_ids
@@ -129,10 +129,10 @@ for epoch in range(300):
         print('accuracy is over 0.95 so we stop training!!')
 
     if epoch % 10 == 0:
-        torch.save(model, f'{epoch}_20210817_1.pt')
+        torch.save(model, f'{epoch}_model.pt')
 
 history = pd.DataFrame({'train_accuracies' : train_accuracies, 'train_lossese' : train_lossese,
                         'val_accuracies' : val_accuracies, 'val_lossese' : val_lossese})
 
-history.to_excel('history_new.xlsx', index = False)
-torch.save(model, '20210817_1.pt')
+history.to_excel('history.xlsx', index = False)
+torch.save(model, 'model.pt')
